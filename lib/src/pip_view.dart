@@ -38,6 +38,7 @@ class PIPViewState extends State<PIPView> with TickerProviderStateMixin {
   PIPViewCorner _corner;
   Offset _dragOffset = Offset.zero;
   bool _isDragging = false;
+  bool _showBottomView = true;
   Map<PIPViewCorner, Offset> _offsets = {};
 
   @override
@@ -69,6 +70,11 @@ class PIPViewState extends State<PIPView> with TickerProviderStateMixin {
   bool _isAnimating() {
     return _toggleFloatingAnimationController.isAnimating ||
         _dragAnimationController.isAnimating;
+  }
+
+  void present() {
+    _showBottomView = false;
+    return presentBelow(SizedBox.shrink());
   }
 
   void presentBelow(Widget widget) {
@@ -179,7 +185,7 @@ class PIPViewState extends State<PIPView> with TickerProviderStateMixin {
 
         return Stack(
           children: <Widget>[
-            if (isFloating)
+            if (isFloating && _showBottomView)
               Navigator(
                 onGenerateRoute: (settings) {
                   return MaterialPageRoute(builder: (_) {
