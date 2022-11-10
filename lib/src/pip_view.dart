@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'dismiss_keyboard.dart';
@@ -333,7 +335,7 @@ Map<PIPViewCorner, Offset> _calculateOffsets({
     final right =
         spaceSize.width - widgetSize.width - windowPadding.right - spacing;
     final bottom =
-        spaceSize.height - widgetSize.height - windowPadding.bottom - spacing;
+        spaceSize.height - widgetSize.height - windowPadding.bottom - spacing - window.padding.bottom;
 
     switch (corner) {
       case PIPViewCorner.topLeft:
